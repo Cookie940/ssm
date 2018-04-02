@@ -1,0 +1,16 @@
+CREATE TABLE Account
+(
+  AccountID VARCHAR(50) PRIMARY KEY,
+  Password VARCHAR(6),
+  Remaining DOUBLE
+);
+CREATE TABLE Trade
+(
+  ID INT PRIMARY KEY AUTO_INCREMENT,
+  AccountID VARCHAR(50),
+  TradeType VARCHAR(1),
+  TradeMoney DOUBLE,
+  TradeTime DATETIME,
+  TradeDigest VARCHAR(1024),
+  CONSTRAINT Trade_AAA FOREIGN KEY (AccountID) REFERENCES account (AccountID)
+);

@@ -1,0 +1,127 @@
+﻿* 
+{
+    font-size: 12px;
+    font-family: Verdana;
+    scrollbar-face-color: #DEE3E7;
+    scrollbar-highlight-color: #FFFFFF;
+    scrollbar-shadow-color: #DEE3E7;
+    scrollbar-3dlight-color: #D1D7DC;
+    scrollbar-arrow-color:  #006699;
+    scrollbar-track-color: #EFEFEF;
+    scrollbar-darkshadow-color: #98AAB1;
+}
+
+body
+{
+	
+}
+
+H1{
+	font-size:30px;
+}
+.remaining{
+	font-size:20px;
+}
+
+
+.operateTitle{
+	font-size:25px;
+}
+a:link, a:visited
+{
+    color: #1c4185; text-decoration:none;
+}
+a:hover
+{
+    color:#FF3300; text-decoration:underline;
+}
+
+.menu a{
+	font-size:15px;
+}
+.menu a:link {
+}
+.menu a:visited {
+}
+.menu a:hover {
+}
+.menu a:active{
+}
+
+/*======================= Tab页样式 ==========================*/
+.divTab
+{	
+	/*
+	border-collapse:collapse;
+    border:solid #99bbe8 ;
+    border-width:1px 0 0 1px;
+    border-bottom:1px;
+	*/
+    border-collapse:collapse;
+    font-size:12px;
+}
+
+.divTab td
+{	
+	height:20px;
+	border: 1px #99bbe8 solid;
+	align:center;
+	font-size:12px;
+	
+}
+
+.Div
+{
+    padding-left: 12px;
+    border-bottom: 0px solid #99bbe8;/*gray;*/
+    margin-bottom: 12px;
+    font-size:12px;
+}
+
+.tabDiv tr
+{
+    padding: 3px 0;
+    margin-left: 0;
+    margin-top: 1px;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+.tabDiv td
+{
+    display: inline;
+    margin-right: 10px;
+}
+
+.tabDiv li a
+{
+    padding: 3px 7px;
+    border: 1px solid #99bbe8;/*778;*/
+    background: white url(./images/bg_tab_inactive.gif) top left repeat-x;
+}
+
+.tabDiv li a:visited, a:hover
+{
+    text-decoration: underline;
+}
+
+.tabDiv li.selected
+{
+    position: relative;
+    font-weight:bold;
+}
+
+.tabDiv li.selected a
+{
+    background-image: url(./images/bg_tab_active.gif);
+    border-bottom-color: white;
+    text-decoration: none;
+}
+
+.tabDiv li.selected a:link, .tabDiv li.selected a:hover, .tabDiv li.selected a:visited
+{
+    background-image: url(./images/bg_tab_active.gif);
+    border-bottom-color: white;
+    text-decoration: none;
+}
+/*===========================================================*/

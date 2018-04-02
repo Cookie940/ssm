@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.**.controller"/>
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources location="/" mapping="/**"/>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--配置资源国际化-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <!-- 定义消息资源文件 (基于类路径) i18n/messages/message_xx_XX.properties-->
+            <value>i18n/messages/message</value>
+        </property>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+    <!-- 基于 Cookie 的本地化解析器-->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <!-- new Cookie("Language","zh_CN") 默认是一天-->
+        <property name="cookieMaxAge" value="604800"/>
+        <property name="defaultLocale" value="zh_CN"/>
+        <property name="cookieName" value="Language"/>
+    </bean>
+
+    <!-- 拦截器通过 lang 的参数来拦截 http 请求,使其设置区域化信息
+    xxxController?lang=en_US
+    xxxController?lang=ja_JP
+    -->
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485600"/>
+        <property name="maxInMemorySize" value="4086"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+</beans>

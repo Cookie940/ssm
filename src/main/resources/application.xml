@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- 扫描service dao自动注入为bean -->
+    <context:component-scan base-package="com.**.dao,com.**.service"/>
+
+    <!-- 读取 jdbc 资源文件 -->
+    <util:properties id="properties" location="classpath:jdbc.properties"/>
+
+    <!-- 数据源(数据库连接池) -> DB -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="#{properties[driverClass]}"/>
+        <property name="jdbcUrl" value="#{properties[jdbcUrl]}"/>
+        <property name="user" value="#{properties[user]}"/>
+        <property name="password" value="#{properties[password]}"/>
+
+        <property name="minPoolSize" value="2"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="initialPoolSize" value="10"/>
+        <property name="acquireIncrement" value="2"/>
+        <property name="maxIdleTime" value="120"/>
+    </bean>
+
+    <!-- SqlSessionFactory - 数据源 -> DB -->
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置Mapper(DAO)接口的自动扫描器,并实例化 - SqlSessionFactory - 数据源 -> DB -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 指定扫描 dao 接口的顶级包：** 表示任意多级 *表示任意内容的一级，多个以逗号或分号间隔。 -->
+        <property name="basePackage" value="com.**.dao"/>
+    </bean>
+</beans>
